@@ -1,0 +1,35 @@
+From e25bad0047fe635ab75370727342672791c91d09 Mon Sep 17 00:00:00 2001
+From: Glynn McCabe <glynn.mccabe@gmail.com>
+Date: Mon, 24 Jan 2022 07:41:00 +1300
+Subject: [PATCH] ARM: dts: add support for VL6180 sensor on STM32MP157 DK2
+
+Signed-off-by: Glynn McCabe <glynn.mccabe@gmail.com>
+---
+ arch/arm/boot/dts/stm32mp157c-dk2.dts | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/arch/arm/boot/dts/stm32mp157c-dk2.dts b/arch/arm/boot/dts/stm32mp157c-dk2.dts
+index 20a86f1b9abc..06b78b385ba6 100644
+--- a/arch/arm/boot/dts/stm32mp157c-dk2.dts
++++ b/arch/arm/boot/dts/stm32mp157c-dk2.dts
+@@ -143,3 +143,17 @@
+ 		max-speed = <3000000>;
+ 	};
+ };
++
++&i2c5 {
++	status = "okay";
++	clock-frequency = <100000>;
++	pinctrl-names = "default", "sleep";
++	pinctrl-0 = <&i2c5_pins_a>;
++	pinctrl-1 = <&i2c5_pins_sleep_a>;
++	
++	proximity@29 {
++            compatible = "st,vl6180";
++            reg = <0x29>;
++        };
++};
++
+-- 
+2.25.1
+
